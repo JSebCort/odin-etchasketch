@@ -16,12 +16,8 @@ div.style.width = dimension+'%';
 div.style.height = dimension+'%';
 
 // TO BE REMOVED
-div.style.background = "red";
+//div.style.background = "red";
 div.style.color = "white";
-
-function myFunction() {
-    alert(dimension);
-  }
 
 // Grabs the container and appends the number of children divs required to make the grid based
 // on the size input by the user in the text box.
@@ -29,10 +25,24 @@ let container = document.getElementById("container");
 let count = 1;
 for(let i = 0; i < numberOfSquares; i++){
     for(let j = 0; j < numberOfSquares; j++){
-        div.innerHTML=count;
+        //div.innerHTML=count;
         container.appendChild(div.cloneNode(true));
-        count++;
+        //count++;
     }
 
 }
-//document.getElementById("container").appendChild(div);
+
+let test = document.getElementById("testbox");
+
+test.addEventListener("mouseenter", function(event){
+    var randomColor = Math.floor(Math.random()*16777215).toString(16);
+    event.target.style.background="#"+randomColor;
+})
+
+let testGrid = document.querySelectorAll(`[class="cell"]`);
+for(const cell of testGrid){
+    cell.addEventListener("mouseenter", function(event){
+        var randomColor = Math.floor(Math.random()*16777215).toString(16);
+        event.target.style.background="#"+randomColor;
+    })
+}
