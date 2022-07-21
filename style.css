@@ -1,0 +1,11 @@
+#container{
+    display:flexbox;
+    background-color: black;
+    width:600px;
+    height:600px;
+    flex-wrap: wrap;
+}
+
+div{
+    display:flex;
+}
