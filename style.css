@@ -1,3 +1,30 @@
+#page{
+    display:flexbox;
+    width: fit-content;
+    
+    margin-left: auto;
+    margin-right: auto;
+    align-items: center;
+}
+
+#settings{
+    display:flexbox;
+    flex-direction: column;
+    width:150px;
+    padding:20px;
+}
+
+.buttons{
+    font-size: medium;
+    color:black;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+#num{
+    align-self: center;
+}
+
 #container{
     display:flexbox;
     background-color: black;
@@ -9,11 +36,4 @@
 
 div{
     display:flex;
-    
-}
-
-#testbox{
-    height:200px;
-    width:200px;
-    background-color: brown;
 }

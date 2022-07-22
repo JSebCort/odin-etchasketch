@@ -4,18 +4,25 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Etch A Sketch</title>
+    <title>Etch-a-Sketch </title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Current text box that sets the grid size, needs to be made into a function -->
-    <input type="text" id="gridSize" value=16>
+    <div id="page">
+        <div id="settings">
+            <input class="buttons" type="button" value="BLACK">
+            <input class="buttons" type="button" value="WHITE">
+            <input class="buttons" type="button" value="RAINBOW">
 
+            <input type="range" id="gridSize" min="16" max="100" value="16" oninput="num.value = this.value">
+            <output id="num">16</output>
+        </div>
+    <!-- Current slider input that sets the grid size,
+        needs to be made into a function -->
+    
     <!-- Container that will hold the grid -->
-    <div id="container"></div>
-
-    <div id="testbox"></div>
-
+        <div id="container"></div>
+    </div>
     <script src="script.js"></script>
 </body>
 </html>
