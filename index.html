@@ -10,10 +10,14 @@
 <body>
     <div id="page">
         <div id="settings">
-            <input class="buttons" type="button" value="BLACK">
-            <input class="buttons" type="button" value="WHITE">
-            <input class="buttons" type="button" value="RAINBOW">
-
+            <input class="buttons" id="blackButton" type="button" value="BLACK">
+            <input class="buttons" id="whiteButton" type="button" value="WHITE">
+            <input class="buttons" id="rainbowButton" type="button" value="RAINBOW">
+            <hr/>
+            <p id="CYO">Choose Your Own Color</p>
+            <input class="buttons" id="chooseButton" type="color" name ="head" value="#f6b73c">
+            <hr/>
+            <p id="chooseGridSize">Choose Grid Size</p>
             <input type="range" id="gridSize" min="16" max="100" value="16" oninput="num.value = this.value+'x'+this.value">
             <output id="num">16x16</output>
         </div>

@@ -12,12 +12,13 @@ let dimension = 100/numberOfSquares;
 //the 600px x 600px container.
 let div = document.createElement("div");
 div.className = "cell";
+div.style.border = "thin solid #5b5b5b"; 
 div.style.width = dimension+'%';
 div.style.height = dimension+'%';
 
 // TO BE REMOVED
 //div.style.background = "red";
-div.style.color = "white";
+div.style.color = "black";
 
 // Grabs the container and appends the number of children divs required to make the grid based
 // on the size input by the user in the text box.
@@ -28,6 +29,19 @@ for(let i = 0; i < Math.pow(numberOfSquares,2); i++){
 
 }
 
+
+let currentColor = "";
+
+const blackButton = document.getElementById("blackButton")
+const whiteButton = document.getElementById("whiteButton")
+const rainbowButton = document.getElementById("rainbowButton")
+const chooseButton = document.getElementById("chooseButton");
+
+blackButton.onclick = function(){currentColor="black"}
+whiteButton.onclick = function(){currentColor="white"}
+rainbowButton.onclick = function(){currentColor="rng"}
+chooseButton.onclick = function(){currentColor="cyo"}
+
 /**
  * Creates array of all the elements with class 'cell' and then iterates
  * through them, giving them each an event listener that changes its colors
@@ -35,7 +49,19 @@ for(let i = 0; i < Math.pow(numberOfSquares,2); i++){
 let testGrid = document.querySelectorAll(`[class="cell"]`);
 for(const cell of testGrid){
     cell.addEventListener("mouseenter", function(event){
-        var randomColor = Math.floor(Math.random()*16777215).toString(16);
-        event.target.style.background="#"+randomColor;
+        if(currentColor=="white"){
+            event.target.style.background = "white";
+        }
+        else if(currentColor=="rng"){
+            var randomColor = Math.floor(Math.random()*16777215).toString(16);
+            event.target.style.background="#"+randomColor;
+        }
+        else if(currentColor=="cyo"){
+            let newColor = document.getElementById("chooseButton").value;
+            event.target.style.background = newColor;
+        }
+        else{
+            event.target.style.background = "black";
+        }
     })
 }
