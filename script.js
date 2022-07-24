@@ -22,11 +22,45 @@ div.style.color = "black";
 
 // Grabs the container and appends the number of children divs required to make the grid based
 // on the size input by the user in the text box.
+
+/**
+ * Sets the grid up
+ */
 let container = document.getElementById("container");
-for(let i = 0; i < Math.pow(numberOfSquares,2); i++){
-    div.innerHTML=i+1;
+let gridChange = document.getElementById("gridSize");
+
+for(let i = 0; i < Math.pow(gridChange.value,2); i++){
+    console.log(Math.pow(gridChange.value,2));
+    //div.innerHTML=i+1;
     container.appendChild(div.cloneNode(true));
 
+}
+
+gridChange.onchange = function(){
+    removeAllChildNodes(container);
+    createGrid(gridChange.value);
+
+}
+
+function createGrid(size){
+    let newDiv = document.createElement("div");
+    let newDimension = 100/size;
+    newDiv.className = "cell";
+    newDiv.style.border = "thin solid #5b5b5b"; 
+    newDiv.style.width = newDimension+'%';
+    newDiv.style.height = newDimension+'%';
+
+    for(let i = 0; i < Math.pow(size,2); i++){
+        console.log(Math.pow(size.value,2));
+        //newDiv.innerHTML=i+1;
+        container.appendChild(newDiv.cloneNode(true));
+    }
+}
+
+function removeAllChildNodes(parent) {
+    while (parent.firstChild) {
+        parent.removeChild(parent.firstChild);
+    }
 }
 
 
