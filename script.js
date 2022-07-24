@@ -1,71 +1,43 @@
-//Gets the grid size from HTML
-let numberOfSquares = document.getElementById("gridSize").value;
-
-//Calculates the width/height of each square by dividing the full container width by the number of squares
-// Example: To fill an entire row of 18 squares, 100/18 is 5.55%. So each box takes up 5.55%.
-//          If its supposed to be 37x37, 100/37 is ~2.7027%. This value's smaller than 100/18 since you
-//              require more boxes to take up the same space.
-let dimension = 100/numberOfSquares;
-
-//Creates the divs that act as grid spots. The height/widths are based on the percentage of space they're supposed
-//to take based on the number of squares that are to be in each column and each row
-//the 600px x 600px container.
-let div = document.createElement("div");
-div.className = "cell";
-div.style.border = "thin solid #5b5b5b"; 
-div.style.width = dimension+'%';
-div.style.height = dimension+'%';
-
-// TO BE REMOVED
-//div.style.background = "red";
-div.style.color = "black";
-
-// Grabs the container and appends the number of children divs required to make the grid based
-// on the size input by the user in the text box.
-
-/**
- * Sets the grid up
- */
+// Creates variables to hold the elements container, the size of the grid
+// that will be created, and the current color chosen.
 let container = document.getElementById("container");
 let gridChange = document.getElementById("gridSize");
+let currentColor = "";
 
-for(let i = 0; i < Math.pow(gridChange.value,2); i++){
-    console.log(Math.pow(gridChange.value,2));
-    //div.innerHTML=i+1;
-    container.appendChild(div.cloneNode(true));
-
-}
-
-gridChange.onchange = function(){
-    removeAllChildNodes(container);
-    createGrid(gridChange.value);
-
-}
-
+/**
+ * @param {number} size - Grid size
+ */
 function createGrid(size){
+
+    // Creates new div element with the height & width required to fit the required
+    // number of spots on a row and column of the grid.
     let newDiv = document.createElement("div");
     let newDimension = 100/size;
     newDiv.className = "cell";
-    newDiv.style.border = "thin solid #5b5b5b"; 
-    newDiv.style.width = newDimension+'%';
-    newDiv.style.height = newDimension+'%';
+    newDiv.style.border = "thin solid #5b5b5b";
+    newDiv.style.width = newDiv.style.height = newDimension+'%';
 
+    // size^2 clones of the new div element are created and appended to the grid container.
     for(let i = 0; i < Math.pow(size,2); i++){
         console.log(Math.pow(size.value,2));
-        //newDiv.innerHTML=i+1;
         container.appendChild(newDiv.cloneNode(true));
     }
 }
 
+/**
+ * @param {*} parent - The parent element of all the children (Ex. the container holding all divs).
+ */
 function removeAllChildNodes(parent) {
+    // Each child is removed from the parent.
+    // This allows for all divs to be removed, thus creating an empty container for
+    // a new grid to be placed in.
     while (parent.firstChild) {
         parent.removeChild(parent.firstChild);
     }
 }
 
-
-let currentColor = "";
-
+// Constants that hold events on whether a color button is clicked, then
+// changes the currentColor to the respective color.
 const blackButton = document.getElementById("blackButton")
 const whiteButton = document.getElementById("whiteButton")
 const rainbowButton = document.getElementById("rainbowButton")
@@ -78,24 +50,45 @@ chooseButton.onclick = function(){currentColor="cyo"}
 
 /**
  * Creates array of all the elements with class 'cell' and then iterates
- * through them, giving them each an event listener that changes its colors
+ * through them, giving them each an event listener that changes its colors.
  */
-let testGrid = document.querySelectorAll(`[class="cell"]`);
-for(const cell of testGrid){
-    cell.addEventListener("mouseenter", function(event){
-        if(currentColor=="white"){
-            event.target.style.background = "white";
-        }
-        else if(currentColor=="rng"){
-            var randomColor = Math.floor(Math.random()*16777215).toString(16);
-            event.target.style.background="#"+randomColor;
-        }
-        else if(currentColor=="cyo"){
-            let newColor = document.getElementById("chooseButton").value;
-            event.target.style.background = newColor;
-        }
-        else{
-            event.target.style.background = "black";
-        }
-    })
+function colorCells(){
+    let testGrid = document.querySelectorAll(`[class="cell"]`);
+    for(const cell of testGrid){
+        cell.addEventListener("mouseenter", function(event){
+            if(currentColor == "white"){
+                event.target.style.background = "white";
+            }
+            else if(currentColor == "rng"){
+                var randomColor = Math.floor(Math.random()*16777215).toString(16);
+                event.target.style.background = "#"+randomColor;
+            }
+            else if(currentColor == "cyo"){
+                let newColor = document.getElementById("chooseButton").value;
+                event.target.style.background = newColor;
+            }
+            else{
+                event.target.style.background = "black";
+            }
+        })
+    }
+}
+
+
+// If the event is detected, all child nodes are removed, a new grid is created,
+// and the ability to color the grid becomes available.
+
+gridChange.onchange = function(){
+    removeAllChildNodes(container);
+    createGrid(gridChange.value);
+    colorCells();
+}
+
+/**
+ * Once the page loads, a grid is created with the default grid size (16x16).
+ * Then, the ability to color the grid is available by calling the colorCells function.
+ */
+window.onload = () => {
+    createGrid(gridChange.value);
+    colorCells();
 }
