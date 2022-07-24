@@ -1,7 +1,16 @@
+body{
+    background-color: rgb(180, 216, 231);
+}
+div.header {
+    display: block;
+    padding: 20px;
+    text-align: center;
+    font-size: 30px;
+  }
+
 #page{
     display:flexbox;
     width: fit-content;
-    
     margin-left: auto;
     margin-right: auto;
     align-items: center;
@@ -34,6 +43,8 @@
     width:600px;
     height:600px;
     flex-wrap: wrap;
+    margin-right: 200px;
+    border-radius: 25px;
     align-content: space-around;
 }
 
@@ -41,7 +52,7 @@ div{
     display:flex;
 }
 
-* { 
+*{ 
     box-sizing: border-box;
 }
 
@@ -51,11 +62,12 @@ div{
     font-weight: bold;
 }
 
-hr {
+hr{
     display: block;
     height: 1px;
     border: 0;
     border-top: 1px solid #ccc;
     margin: 1em 0;
     padding: 0;
+    
 }
